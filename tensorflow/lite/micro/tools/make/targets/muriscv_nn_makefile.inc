@@ -26,14 +26,6 @@ BUILD_TYPE := micro
 LDFLAGS += --specs=nano.specs
 LDFLAGS += -mno-relax
 
-ifneq ($(filter rv32gcv rv32imv rv32im_zve32x,$(TARGET_ARCH)),)
-  USE_VEXT := ON
-  
-ifneq ($(filter rv32gcp rv32imp,$(TARGET_ARCH)),)
-  USE_PEXT := ON
-
-
-
 # Path to GCC toolchain
 GCC_TOOLCHAIN_ROOT := $(MAKEFILE_PATH)../../../../../../../../Toolchain/$(TARGET_ARCH)
 
