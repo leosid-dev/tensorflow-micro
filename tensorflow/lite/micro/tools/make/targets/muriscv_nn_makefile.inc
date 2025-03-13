@@ -16,7 +16,7 @@
 MAKEFILE_PATH := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
 
 TARGET_ARCH := riscv32
-GCC_TOOLCHAIN_PREFIX := riscv32-unknown-elf
+GCC_TOOLCHAIN_PREFIX := riscv64-unknown-elf
 
 RISCV_ARCH := rv32imc
 RISCV_ABI := ilp32
@@ -25,6 +25,13 @@ RISCV_CODE_MODEL := medany
 BUILD_TYPE := micro
 LDFLAGS += --specs=nano.specs
 LDFLAGS += -mno-relax
+
+ifneq ($(filter rv32gcv rv32imv rv32im_zve32x,$(TARGET_ARCH)),)
+  USE_VEXT := ON
+  
+ifneq ($(filter rv32gcp rv32imp,$(TARGET_ARCH)),)
+  USE_PEXT := ON
+
 
 
 # Path to GCC toolchain
